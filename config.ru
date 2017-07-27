@@ -1,10 +1,10 @@
 require 'sinatra'
 
 post '/' do
-  text = params.fetch('slacktrack').stripe
+  text = params.fetch('command').strip
 
   case text
-  when 'slacktrack'
+  when '/slacktrack'
     'GOTIT'
   end
 end
