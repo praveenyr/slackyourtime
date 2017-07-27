@@ -1,12 +1,20 @@
 require 'sinatra'
+require 'envyable'
+Envyable.load('.config/env.yml','development')
+
+InvalidTokenError = Class.new(Exception)
 
 post '/' do
-  text = params.fetch('command').strip
+  puts params
 
-  case text
-  when '/slacktrack'
-    'GOTIT'
-  end
+  raise(InvalidTokenError) unless params[:token] == ENV['SLACK_TOKEN']
+  # text = params.fetch('command').strip
+  #
+  # case text
+  # when '/slacktrack'
+  #   'GOTIT'
+  # end
+  "Hello Praveen!"
 end
 
 run Sinatra::Application
