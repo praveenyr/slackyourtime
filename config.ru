@@ -1,19 +1,21 @@
 require 'sinatra'
 require 'envyable'
-Envyable.load('.config/env.yml','development')
+require 'slack-ruby-client'
+Envyable.load('./config/env.yml', 'development')
+
+# Slack.configure do |config|
+#   config.token = ENV['SLACK_TOKEN']
+# end
 
 InvalidTokenError = Class.new(Exception)
 
 post '/' do
-  puts params
 
   raise(InvalidTokenError) unless params[:token] == ENV['SLACK_TOKEN']
-  # text = params.fetch('command').strip
-  #
-  # case text
-  # when '/slacktrack'
-  #   'GOTIT'
-  # end
+
+ # client = Slack::Web::Client.new
+ # puts client.auth_test
+
   "Hello Praveen!"
 end
 
